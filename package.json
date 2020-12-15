@@ -1,0 +1,31 @@
+{
+  "name": "duel-link-scirpt",
+  "version": "0.0.1",
+  "description": "auto conplete confluence",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anotherso1a/duel-link-scirpt.git"
+  },
+  "keywords": [
+    "duel",
+    "js",
+    "webpack"
+  ],
+  "author": "anothersola",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anotherso1a/duel-link-scirpt/issues"
+  },
+  "homepage": "https://github.com/anotherso1a/duel-link-scirpt#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/parser": "^7.12.10",
+    "@babel/traverse": "^7.12.10",
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0"
+  }
+}
