@@ -1,8 +1,19 @@
-import { outCheck } from "./outCheck"
+import {
+  outCheck
+} from "./outCheck"
+import {
+  isInDuel, clearEffect
+} from "../common/utils";
+import {
+  xxDuel
+} from "./xxDuel";
 
 
-export const xxFluence = () => {
-  outCheck('xx')
+export var xxFluence = () => {
+  clearEffect()
+  if (isInDuel()) {
+    xxDuel()
+  } else {
+    outCheck('xx')
+  }
 }
-
-

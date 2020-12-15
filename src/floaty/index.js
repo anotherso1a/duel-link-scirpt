@@ -13,7 +13,7 @@ var w = floaty.window(
   </frame>
 );
 
-var floatPop = floaty.window(
+var floatPop = floaty.rawWindow(
   <frame id="show" w="80px" h="80px" bg="#80000000" text="显示选项"></frame>
 )
 
@@ -27,6 +27,7 @@ export function showPannel(){
 }
 
 // init
+floatPop.setTouchable(true);
 floatPop.setPosition(0, 220)
 
 floatPop.show.click(showPannel)
