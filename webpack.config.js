@@ -2,10 +2,12 @@ const path = require('path')
 const TransformAUIPlugin = require('./plugins/transform-aui-plugin.js')
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src/index.js'),
+  entry: {
+    xx: path.resolve(__dirname, 'src/xx.js'),
+    csm: path.resolve(__dirname, 'src/csm.js')
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js'
   },
   module: {
     rules: [{

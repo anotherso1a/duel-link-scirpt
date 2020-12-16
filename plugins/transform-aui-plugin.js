@@ -14,7 +14,9 @@ class TransformAUIPlugin {
           let auiReg = /['"]\$\$([\s\S]*?)\$\$['"]/g
           fs.writeFileSync(
             filePath,
-            fs.readFileSync(filePath, 'utf8').replace(auiReg, '$1').replace(/\\n\s*?</g, '<')
+            `auto();requestScreenCapture();setScreenMetrics(720, 1280);` + fs.readFileSync(filePath, 'utf8')
+              .replace(auiReg, '$1')
+              .replace(/\\n\s*?</g, '<')
           )
         })
         try {

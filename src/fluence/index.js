@@ -17,3 +17,12 @@ export var xxFluence = () => {
     outCheck('xx')
   }
 }
+
+export var csmFluence = () => {
+  clearEffect()
+  if (isInDuel()) {
+    xxDuel()
+  } else {
+    outCheck('csm')
+  }
+}

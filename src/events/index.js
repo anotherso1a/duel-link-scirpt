@@ -1,26 +1,44 @@
 import {
-  GlobalTimer
-} from '../common/timer'
-import {
-  xxFluence
+  xxFluence,
+  csmFluence
 } from '../fluence'
 import {
   bindEvents
 } from './events'
 
 
+var Status = {
+  xx: false,
+  csm: false
+}
 // 绑定休闲决斗事件
-const xxStart = () => {
-  GlobalTimer.xxTimer && clearInterval(GlobalTimer.xxTimer)
-  GlobalTimer.xxTimer = setInterval(xxFluence, 3000)
+var xxStart = () => {
+  Status.xx = true
+  while(Status.xx) {
+    sleep(3000)
+    xxFluence()
+  }
 }
 
-const xxStop = () => {
-  GlobalTimer.xxTimer && clearInterval(GlobalTimer.xxTimer)
-  GlobalTimer.xxTimer = null
+var xxStop = () => {
+  Status.xx = false
 }
 
 bindEvents('xx', xxStart)
 bindEvents('xxstop', xxStop)
 
 // todo 绑定传送门
+var csmStart = () => {
+  Status.csm = true
+  while(Status.csm) {
+    sleep(3000)
+    csmFluence()
+  }
+}
+
+var csmStop = () => {
+  Status.csm = false
+}
+
+bindEvents('csm', csmStart)
+bindEvents('csmstop', csmStop)

@@ -45,6 +45,19 @@ export function isInxx(capture) {
   return p
 }
 
+/**
+ * 是否在传送门
+ */
+export function isIncsm(capture){
+  var csmdl = images.read("/sdcard/Pictures/csmdl.png");
+  var p = findImage(capture || captureScreen(), csmdl, {
+    region: [161, 1055, 400, 100],
+    threshold: 0.8
+  });
+  csmdl.recycle()
+  return p
+}
+
 /** 页面上是否有按钮需要点击，需要优化，目前编辑卡片也会被点击 */
 export function needClick(capture) {
   var needclick = images.read("/sdcard/Pictures/needclick.png");
