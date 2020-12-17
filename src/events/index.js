@@ -14,7 +14,7 @@ var Status = {
 // 绑定休闲决斗事件
 var xxStart = () => {
   Status.xx = true
-  while(Status.xx) {
+  while (Status.xx) {
     sleep(3000)
     xxFluence()
   }
@@ -30,7 +30,7 @@ bindEvents('xxstop', xxStop)
 // todo 绑定传送门
 var csmStart = () => {
   Status.csm = true
-  while(Status.csm) {
+  while (Status.csm) {
     sleep(3000)
     csmFluence()
   }

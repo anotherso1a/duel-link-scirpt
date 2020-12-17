@@ -1,7 +1,7 @@
-import { stopAll } from "../common/utils";
-import { emit } from "../events/events";
+// import { stopAll } from "../common/utils"
+import { emit } from "../events/events"
 
-"ui";
+"ui"
 ui.layout(
   <vertical>
     <text padding="10" w="auto" h="auto" text="使用说明，点击以下按钮先打开游戏，进入游戏首页"/>
@@ -13,7 +13,7 @@ ui.layout(
     <button style="Widget.AppCompat.Button.Colored" id="pause" text="暂停"/>
     <button style="Widget.AppCompat.Button.Colored" id="stop" text="退出"/>
   </vertical>
-);
+)
 
 
 // bindings

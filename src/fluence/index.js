@@ -3,10 +3,10 @@ import {
 } from "./outCheck"
 import {
   isInDuel, clearEffect
-} from "../common/utils";
+} from "../common/utils"
 import {
   xxDuel
-} from "./xxDuel";
+} from "./xxDuel"
 
 
 export var xxFluence = () => {
