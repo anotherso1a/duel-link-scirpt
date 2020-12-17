@@ -54,7 +54,7 @@ export function use(withCover){
   var tryTimes = 0;
   while (useCard()) {
     tryTimes++;
-    if (tryTimes > 3) break; // 有时候这个流程会陷入死循环，加一个判断跳出一下
+    if (tryTimes > 6) break; // 有时候这个流程会陷入死循环，加一个判断跳出一下
     // 持续阻断使用牌
     sleep(1000); // 中间睡一秒
   }
