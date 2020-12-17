@@ -1,5 +1,6 @@
 const path = require('path')
 const TransformAUIPlugin = require('./plugins/transform-aui-plugin.js')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -15,5 +16,8 @@ module.exports = {
       use: path.resolve(__dirname, 'loader/android-ui-loader')
     }]
   },
-  plugins: [new TransformAUIPlugin()]
+  plugins: [
+    new ESLintPlugin(),
+    new TransformAUIPlugin()
+  ]
 }
