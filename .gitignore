@@ -105,3 +105,6 @@ dist
 
 # Use yarn
 package-lock.json
+
+# system
+.DS_Store

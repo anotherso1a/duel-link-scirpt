@@ -1,3 +1,5 @@
+import { FindImage, getImage } from "./actions"
+
 /** 停止所有脚本进程 */
 export function stopAll(){
   engines.stopAll()
@@ -14,8 +16,8 @@ export function callActions(fn, repeat, clip){
 
 /** 是否在首页 */
 export function isIndex(capture){
-  var index = images.read("/sdcard/Pictures/index.png")
-  var p = findImage(capture || captureScreen(), index, {
+  var index = getImage("./images/index.png")
+  var p = FindImage(capture || captureScreen(), index, {
     region: [620, 116, 100, 110],
     threshold: 0.8
   })
@@ -25,8 +27,8 @@ export function isIndex(capture){
 
 /** 是否能获取到休闲决斗，二级页面 */
 export function isxx(capture){
-  var xx = images.read("/sdcard/Pictures/xx.png")
-  var p = findImage(capture || captureScreen(), xx, {
+  var xx = getImage("./images/xx.png")
+  var p = FindImage(capture || captureScreen(), xx, {
     region: [0, 518, 720, 140],
     threshold: 0.8
   })
@@ -36,8 +38,8 @@ export function isxx(capture){
 
 /** 是否打开了休闲决斗的pannel，和二级页面不同的是此处为顶部识别 */
 export function isInxx(capture){
-  var xx = images.read("/sdcard/Pictures/xx.png")
-  var p = findImage(capture || captureScreen(), xx, {
+  var xx = getImage("./images/xx.png")
+  var p = FindImage(capture || captureScreen(), xx, {
     region: [0, 93, 720, 140],
     threshold: 0.8
   })
@@ -49,9 +51,21 @@ export function isInxx(capture){
  * 是否在传送门
  */
 export function isIncsm(capture){
-  var csmdl = images.read("/sdcard/Pictures/csmdl.png")
-  var p = findImage(capture || captureScreen(), csmdl, {
+  var csmdl = getImage("./images/csmdl.png")
+  var p = FindImage(capture || captureScreen(), csmdl, {
     region: [161, 1055, 400, 100],
+    threshold: 0.8
+  })
+  csmdl.recycle()
+  return p
+}
+
+/**
+ * 是否在活动，该方法只能在活动流程的入口使用
+ */
+export function isInact(capture){
+  var csmdl = getImage("./images/csmdl.png")
+  var p = FindImage(capture || captureScreen(), csmdl, {
     threshold: 0.8
   })
   csmdl.recycle()
@@ -60,9 +74,10 @@ export function isIncsm(capture){
 
 /** 页面上是否有按钮需要点击，需要优化，目前编辑卡片也会被点击 */
 export function needClick(capture){
-  var needclick = images.read("/sdcard/Pictures/needclick.png")
+  var needclick = getImage("./images/needclick.png")
 
-  var p = findImage(capture || captureScreen(), needclick, {
+  var p = FindImage(capture || captureScreen(), needclick, {
+    region: [0, 0, 720, 1200], // 不检查最下一排
     threshold: 0.8
   })
   needclick.recycle()
@@ -90,8 +105,8 @@ export function clearEffect(){
 export function checkExtra(capture){
   capture = capture || captureScreen()
   // 页面是否有确认按钮，优先判断，有就点
-  var confirm = images.read("/sdcard/Pictures/confirm.png")
-  var p = findImage(capture, confirm, {
+  var confirm = getImage("./images/confirm.png")
+  var p = FindImage(capture, confirm, {
     region: [0, 516, 720, 300],
     threshold: 0.8
   })
@@ -101,8 +116,8 @@ export function checkExtra(capture){
     return p
   }
   // 选择攻击或守备表示形式
-  var extra = images.read("/sdcard/Pictures/extra.png")
-  p = findImage(capture, extra, {
+  var extra = getImage("./images/extra.png")
+  p = FindImage(capture, extra, {
     region: [0, 730, 720, 170],
     threshold: 0.8
   })
@@ -114,8 +129,8 @@ export function checkExtra(capture){
     return p
   }
   // 是否需要选择，当左下角出现特殊按钮时，有就选择第一个
-  var choose = images.read("/sdcard/Pictures/choose.png")
-  p = findImage(capture, choose, {
+  var choose = getImage("./images/choose.png")
+  p = FindImage(capture, choose, {
     region: [575, 1135],
     threshold: 0.8
   })
@@ -135,8 +150,8 @@ export function checkExtra(capture){
 
 /** 是否有跳转至下一个阶段的按钮 */
 export function canOperate(capture){
-  var indl = images.read("/sdcard/Pictures/indl.png")
-  var p = findImage(capture || captureScreen(), indl, {
+  var indl = getImage("./images/indl.png")
+  var p = FindImage(capture || captureScreen(), indl, {
     region: [525, 708, 195, 300],
     threshold: 0.8
   })
@@ -169,8 +184,8 @@ export function resetPosition(){
  * 其实也可以判断“记录”按钮
  */
 export function checkEnd(capture){
-  var ok = images.read("/sdcard/Pictures/ok.png")
-  var p = findImage(capture || captureScreen(), ok, {
+  var ok = getImage("./images/ok.png")
+  var p = FindImage(capture || captureScreen(), ok, {
     region: [0, 50],
     threshold: 0.8
   })
@@ -182,8 +197,8 @@ export function checkEnd(capture){
  * 是否是我放准备阶段
  */
 export function isPrepare(capture){
-  var prepare = images.read("/sdcard/Pictures/prepare.png")
-  var p = findImage(capture || captureScreen(), prepare, {
+  var prepare = getImage("./images/prepare.png")
+  var p = FindImage(capture || captureScreen(), prepare, {
     region: [400, 60, 200, 40],
     threshold: 0.8
   })
@@ -195,8 +210,8 @@ export function isPrepare(capture){
  * 是否是我方战斗阶段
  */
 export function isAttack(capture){
-  var atk = images.read("/sdcard/Pictures/attack.png")
-  var p = findImage(capture || captureScreen(), atk, {
+  var atk = getImage("./images/attack.png")
+  var p = FindImage(capture || captureScreen(), atk, {
     region: [400, 60, 200, 40],
     threshold: 0.8
   })
@@ -207,8 +222,8 @@ export function isAttack(capture){
  * 是否在决斗中
  */
 export function isInDuel(capture){
-  var induel = images.read("/sdcard/Pictures/induel.png")
-  var p = findImage(capture || captureScreen(), induel, {
+  var induel = getImage("./images/induel.png")
+  var p = FindImage(capture || captureScreen(), induel, {
     region: [445, 19, 100, 40],
     threshold: 0.8
   })

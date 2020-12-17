@@ -4,24 +4,15 @@ import {
   isInxx,
   isxx,
   needClick,
-  isIncsm
+  isIncsm,
+  isInact
 } from '../common/utils'
-
-/**
- * 首页check
- * @param {"xx"|"csm"} type 自动执行类型
- */
-export function outCheck(type){
-  return type === 'xx' ?
-    xxOutCheck() :
-    csmOutCheck()
-}
 
 
 /**
  * 休闲决斗入口检查
  */
-function xxOutCheck(){
+export function xxOutCheck(){
   var capture = captureScreen()
   var p = isIndex(capture)
   if (p) {
@@ -48,7 +39,7 @@ function xxOutCheck(){
 /**
  * 传送门外部检查
  */
-function csmOutCheck(){
+export function csmOutCheck(){
   var capture = captureScreen()
   var p = isIndex(capture)
   if (p) {
@@ -57,6 +48,29 @@ function csmOutCheck(){
   }
   // todo check juedou 
   p = isIncsm(capture)
+  if (p) {
+    click(p.x, p.y)
+    return
+  }
+  p = needClick(capture) // 默认循环，自动点击按钮
+  if (p) {
+    click(p.x, p.y)
+    return
+  }
+}
+
+/**
+ * 活动执行脚本外部检查
+ */
+export function actOutCheck(){
+  var capture = captureScreen()
+  var p = isIndex(capture)
+  if (p) {
+    click(360, 360)
+    return p
+  }
+
+  p = isInact(capture)
   if (p) {
     click(p.x, p.y)
     return

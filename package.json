@@ -4,8 +4,7 @@
   "description": "auto conplete confluence",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config ./build/split.config.js",
-    "build:combine": "webpack --config ./build/combine.config.js",
+    "build": "webpack",
     "lint": "eslint --ext .js src/",
     "preinstall": "node ./scripts/checkYarn.js"
   },
@@ -30,6 +29,7 @@
     "@babel/traverse": "^7.12.10",
     "babel-eslint": "^10.1.0",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^7.0.0",
     "eslint": "^7.15.0",
     "webpack": "^5.10.1",
     "webpack-cli": "^4.2.0"

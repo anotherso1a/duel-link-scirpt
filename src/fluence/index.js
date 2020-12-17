@@ -1,9 +1,7 @@
 import {
-  outCheck
-} from "./outCheck"
-import {
   isInDuel, clearEffect
 } from "../common/utils"
+import { actOutCheck, csmOutCheck, xxOutCheck } from "./outCheck"
 import {
   xxDuel
 } from "./xxDuel"
@@ -14,7 +12,7 @@ export var xxFluence = () => {
   if (isInDuel()) {
     xxDuel()
   } else {
-    outCheck('xx')
+    xxOutCheck()
   }
 }
 
@@ -23,6 +21,15 @@ export var csmFluence = () => {
   if (isInDuel()) {
     xxDuel()
   } else {
-    outCheck('csm')
+    csmOutCheck()
+  }
+}
+
+export var actFluence = () => {
+  clearEffect()
+  if (isInDuel()) {
+    xxDuel()
+  } else {
+    actOutCheck()
   }
 }

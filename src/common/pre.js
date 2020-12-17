@@ -1,2 +1,2 @@
-/* eslint-disable  no-unused-vars*/
-var timer = setInterval(() => {}, 3000) // 维持脚本
+export var RATIO = device.width / 720 // 比例
+export var CACHED_IMG = {} // 缓存素材图片
