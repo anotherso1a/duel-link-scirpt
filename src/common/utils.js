@@ -21,7 +21,7 @@ export function isIndex(capture){
     region: [620, 116, 100, 110],
     threshold: 0.8
   });
-  index.recycle();
+
   return p;
 }
 
@@ -32,7 +32,7 @@ export function isxx(capture){
     region: [0, 518, 720, 140],
     threshold: 0.8
   });
-  xx.recycle();
+
   return p;
 }
 
@@ -43,7 +43,7 @@ export function isInxx(capture){
     region: [0, 93, 720, 140],
     threshold: 0.8
   });
-  xx.recycle();
+
   return p;
 }
 
@@ -56,7 +56,7 @@ export function isIncsm(capture){
     region: [161, 1055, 400, 100],
     threshold: 0.8
   });
-  csmdl.recycle();
+
   return p;
 }
 
@@ -68,7 +68,7 @@ export function isInact(capture){
   var p = FindImage(capture || captureScreen(), csmdl, {
     threshold: 0.8
   });
-  csmdl.recycle();
+
   return p;
 }
 
@@ -80,7 +80,7 @@ export function needClick(capture){
     region: [0, 0, 720, 1200], // 不检查最下一排
     threshold: 0.8
   });
-  needclick.recycle();
+
 
   return p;
 }
@@ -110,7 +110,7 @@ export function checkExtra(capture){
     region: [0, 516, 720, 300],
     threshold: 0.8
   });
-  confirm.recycle();
+
   if (p) {
     click(p.x, p.y);
     return p;
@@ -121,7 +121,7 @@ export function checkExtra(capture){
     region: [0, 730, 720, 170],
     threshold: 0.8
   });
-  extra.recycle();
+
   if (p) {
     click(200, 600);
     sleep(500);
@@ -134,7 +134,7 @@ export function checkExtra(capture){
     region: [575, 1135],
     threshold: 0.8
   });
-  choose.recycle();
+
   if (p) {
     click(135, 874);
     sleep(500);
@@ -155,7 +155,7 @@ export function canOperate(capture){
     region: [525, 708, 195, 300],
     threshold: 0.8
   });
-  indl.recycle();
+
   return p;
 }
 
@@ -189,7 +189,7 @@ export function checkEnd(capture){
     region: [0, 50],
     threshold: 0.8
   });
-  ok.recycle();
+
   return p;
 }
 
@@ -202,7 +202,7 @@ export function isPrepare(capture){
     region: [400, 60, 200, 40],
     threshold: 0.8
   });
-  prepare.recycle();
+
   return p;
 }
 
@@ -215,7 +215,7 @@ export function isAttack(capture){
     region: [400, 60, 200, 40],
     threshold: 0.8
   });
-  atk.recycle();
+
   return p;
 }
 /**
@@ -227,6 +227,6 @@ export function isInDuel(capture){
     region: [445, 19, 100, 40],
     threshold: 0.8
   });
-  induel.recycle();
+
   return p;
 }
