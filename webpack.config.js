@@ -29,7 +29,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [{
         from: resolve('src/images'),
-        to: resolve('dist/images')
+        to: resolve('dist/images'),
+        toType: 'dir'
       }],
     }),
     new ESLintPlugin(),

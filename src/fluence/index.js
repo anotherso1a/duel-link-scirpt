@@ -1,35 +1,35 @@
 import {
   isInDuel, clearEffect
-} from "../common/utils"
-import { actOutCheck, csmOutCheck, xxOutCheck } from "./outCheck"
+} from "../common/utils";
+import { actOutCheck, csmOutCheck, xxOutCheck } from "./outCheck";
 import {
   xxDuel
-} from "./xxDuel"
+} from "./xxDuel";
 
 
 export var xxFluence = () => {
-  clearEffect()
+  clearEffect();
   if (isInDuel()) {
-    xxDuel()
+    xxDuel();
   } else {
-    xxOutCheck()
+    xxOutCheck();
   }
-}
+};
 
 export var csmFluence = () => {
-  clearEffect()
+  clearEffect();
   if (isInDuel()) {
-    xxDuel()
+    xxDuel();
   } else {
-    csmOutCheck()
+    csmOutCheck();
   }
-}
+};
 
 export var actFluence = () => {
-  clearEffect()
+  clearEffect();
   if (isInDuel()) {
-    xxDuel()
+    xxDuel();
   } else {
-    actOutCheck()
+    actOutCheck();
   }
-}
+};

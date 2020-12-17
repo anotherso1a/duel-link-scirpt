@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
-import { xxFluence } from '../fluence'
+import { xxFluence } from '../fluence';
 
 while (true) {
-  sleep(3000)
-  xxFluence()
+  sleep(3000);
+  xxFluence();
 }

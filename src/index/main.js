@@ -1,4 +1,4 @@
-"ui"
+"ui";
 ui.layout(
   <vertical>
     <text padding="10" w="auto" h="auto" text="使用说明，点击以下按钮先打开游戏，进入游戏首页"/>
@@ -11,64 +11,64 @@ ui.layout(
     <button style="Widget.AppCompat.Button.Colored" id="pause" text="暂停"/>
     <button style="Widget.AppCompat.Button.Colored" id="stop" text="退出"/>
   </vertical>
-)
+);
 
-var xx = "./xx.js"
-var csm = "./csm.js"
-var act = "./act.js"
+var xx = "./xx.js";
+var csm = "./csm.js";
+var act = "./act.js";
 
 
-var execution
-var isSomeTaskRunning = false
+var execution;
+var isSomeTaskRunning = false;
 
 // 休闲决斗脚本执行
 ui.xx.on("click", () => {
   if (isSomeTaskRunning) {
-    return toastLog('请先停止正在运行中的脚本')
+    return toastLog('请先停止正在运行中的脚本');
   }
   threads.start(function(){
-    isSomeTaskRunning = true
-    toastLog("开始执行休闲决斗脚本")
-    sleep(1200)
-    execution = engines.execScriptFile(xx)
-  })
-})
+    isSomeTaskRunning = true;
+    toastLog("开始执行休闲决斗脚本");
+    sleep(1200);
+    execution = engines.execScriptFile(xx);
+  });
+});
 // 传送门决斗脚本执行
 ui.csm.on("click", () => {
   if (isSomeTaskRunning) {
-    return toastLog('请先停止正在运行中的脚本')
+    return toastLog('请先停止正在运行中的脚本');
   }
   threads.start(function(){
-    isSomeTaskRunning = true
-    toastLog("开始执行传送门决斗脚本")
-    sleep(1200)
-    execution = engines.execScriptFile(csm)
-  })
-})
+    isSomeTaskRunning = true;
+    toastLog("开始执行传送门决斗脚本");
+    sleep(1200);
+    execution = engines.execScriptFile(csm);
+  });
+});
 // 活动脚本执行
 ui.act.on("click", () => {
   if (isSomeTaskRunning) {
-    return toastLog('请先停止正在运行中的脚本')
+    return toastLog('请先停止正在运行中的脚本');
   }
   threads.start(function(){
-    isSomeTaskRunning = true
-    toastLog("开始执行活动决斗脚本")
-    sleep(1200)
-    execution = engines.execScriptFile(act)
-  })
-})
+    isSomeTaskRunning = true;
+    toastLog("开始执行活动决斗脚本");
+    sleep(1200);
+    execution = engines.execScriptFile(act);
+  });
+});
 
 
 // 暂停
 ui.pause.on("click", () => {
   if (execution) {
-    execution.getEngine().forceStop() // 停止脚本
-    isSomeTaskRunning = false // 设置值为false
-    execution = false
+    execution.getEngine().forceStop(); // 停止脚本
+    isSomeTaskRunning = false; // 设置值为false
+    execution = false;
   }
-})
+});
 
 ui.stop.on("click", () => {
-  exit()
+  exit();
 
-})
+});
