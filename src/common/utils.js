@@ -64,8 +64,8 @@ export function isIncsm(capture){
  * 是否在活动，该方法只能在活动流程的入口使用
  */
 export function isInact(capture){
-  var csmdl = getImage("./images/csmdl.png");
-  var p = FindImage(capture || captureScreen(), csmdl, {
+  var isact = getImage("./images/isact.png");
+  var p = FindImage(capture || captureScreen(), isact, {
     threshold: 0.8
   });
 
@@ -77,7 +77,6 @@ export function needClick(capture){
   var needclick = getImage("./images/needclick.png");
 
   var p = FindImage(capture || captureScreen(), needclick, {
-    region: [0, 0, 720, 1200], // 不检查最下一排
     threshold: 0.8
   });
 
@@ -91,7 +90,7 @@ export function needClick(capture){
  * 可以触发抽卡和一些点空白处关闭的弹窗
  */
 export function clearEffect(){
-  click(720, 250); // 点击
+  click(720, 400); // 点击
 }
 
 

@@ -5,7 +5,8 @@ import {
   nextSetp,
   isPrepare,
   // checkEnd,
-  resetPosition
+  resetPosition,
+  clearEffect
 } from "../common/utils";
 
 /**
@@ -24,7 +25,14 @@ export function use(withCover){
       var x = list[i];
       swipe(x, startY, x, endY, 200); // 使用手牌
       sleep(500);
-      withCover ? click(314, 942) : click(274, 942); // 发动或召唤
+      if (withCover) {
+        click(314, 942); // 可以覆盖
+        sleep(300);
+        clearEffect(); // 可能会点击到覆盖的牌，提示信息后会导致下一回合按钮隐藏，在这里消除一下影响
+      } else {
+        click(274, 942); // 发动或召唤
+      }
+      
       sleep(500);
       var used = canOperate();
       if (!used) { // 按钮消失说明使用成功
@@ -43,7 +51,10 @@ export function use(withCover){
     // 返回是否用过牌
     return useFlag;
   }
+  var tryTimes = 0;
   while (useCard()) {
+    tryTimes++;
+    if (tryTimes > 3) break; // 有时候这个流程会陷入死循环，加一个判断跳出一下
     // 持续阻断使用牌
     sleep(1000); // 中间睡一秒
   }

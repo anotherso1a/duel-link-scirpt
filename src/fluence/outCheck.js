@@ -72,7 +72,7 @@ export function actOutCheck(){
 
   p = isInact(capture);
   if (p) {
-    click(p.x, p.y);
+    click(352, 763);
     return;
   }
   p = needClick(capture); // 默认循环，自动点击按钮

@@ -63,6 +63,7 @@ ui.act.on("click", () => {
 ui.pause.on("click", () => {
   if (execution) {
     execution.getEngine().forceStop(); // 停止脚本
+    toastLog('脚本已停止');
     isSomeTaskRunning = false; // 设置值为false
     execution = false;
   }
