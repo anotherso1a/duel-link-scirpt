@@ -124,6 +124,16 @@ export function checkExtra(capture) {
     click(135, 874);
     sleep(500);
     click(375, 1082);
+    return p
+  }
+  var need = needClick(capture)
+  p = findImage(capture, need, {
+    region: [500, 0],
+    threshold: 0.8
+  });
+  need.recycle()
+  if(p){
+    click(p.x, p.y);
   }
   return p // 如果都没有触发那就走别的流程
 }
