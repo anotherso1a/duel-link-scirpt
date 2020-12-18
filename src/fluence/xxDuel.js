@@ -30,7 +30,7 @@ export function use(withCover){
         click(314, 942); // 可以覆盖
         sleep(500);
         checkExtra(); // 当升级召唤或者特殊召唤会提示弹窗，用这个check一下
-        sleep(300) // 睡一下，不睡的话上面的点击会被下面打断
+        sleep(300); // 睡一下，不睡的话上面的点击会被下面打断
         clearEffect(); // 可能会点击到覆盖的牌，提示信息后会导致下一回合按钮隐藏，在这里消除一下影响
       } else {
         click(274, 942); // 发动或召唤
