@@ -31,4 +31,4 @@ export RELEASE="release"
 
 npm version $type -m '[release] '$type': @%s'
 
-git push
+git push origin --tag
