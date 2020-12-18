@@ -1,4 +1,4 @@
-const fs = require("fs")
+const fs = require("fs-extra")
 const path = require("path")
 const resolve = path.resolve.bind(path, __dirname)
 class TransformAUIPlugin {
@@ -25,6 +25,12 @@ class TransformAUIPlugin {
             resolve('../dist/main.js'),
             fs.readFileSync(resolve('../src/index/main.js'), 'utf8')
           )
+          let destImgPath = resolve('../dist/images')
+          let srcImgPath = resolve('../src/images')
+          fs.ensureDirSync(destImgPath)
+          fs.readdirSync(srcImgPath).forEach(item => {
+            fs.copy(resolve(srcImgPath, item), resolve(destImgPath, item))
+          })
         }, 500)
         try {
           resl()

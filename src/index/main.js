@@ -1,5 +1,5 @@
 "ui";
-auto();requestScreenCapture();setScreenMetrics(720, 1280);
+auto();
 ui.layout(
   <vertical>
     <text padding="10" w="auto" h="auto" text="使用说明，点击以下按钮先打开游戏，进入游戏首页"/>

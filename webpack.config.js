@@ -3,7 +3,6 @@ const fs = require('fs')
 const TransformAUIPlugin = require('./plugins/transform-aui-plugin.js')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
 
 const resolve = path.resolve.bind(path, __dirname)
 
@@ -26,13 +25,6 @@ module.exports = {
     }]
   },
   plugins: [
-    new CopyPlugin({
-      patterns: [{
-        from: resolve('src/images'),
-        to: resolve('dist/images'),
-        toType: 'dir'
-      }],
-    }),
     new ESLintPlugin(),
     new CleanWebpackPlugin(),
     new TransformAUIPlugin()

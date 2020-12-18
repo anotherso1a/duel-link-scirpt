@@ -1,0 +1,41 @@
+name: Release DuelScripts
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  release:
+    name: build and release DuelScripts
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check out git repository
+        uses: actions/checkout@v2
+
+      - name: install dependencies
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+
+      - name: build project
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: build # will run `yarn build` command
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ubuntu-latest
+          path: dist
+
+      - name: release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: "dist/**"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
