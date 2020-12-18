@@ -4,6 +4,7 @@ import {
   isInxx,
   isxx,
   needClick,
+  isAutoduel,
   isIncsm,
   isInact
 } from '../common/utils';
@@ -72,10 +73,17 @@ export function actOutCheck(){
 
   p = isInact(capture);
   if (p) {
+    // click(p.x,p.y) // 本来应该这样，但是决斗会动，有时候会判断失败
     click(352, 763);
     return;
   }
   p = needClick(capture); // 默认循环，自动点击按钮
+  if (p) {
+    click(p.x, p.y);
+    return;
+  }
+  //处理中途龙亚出现的情况
+  p = isAutoduel(capture);
   if (p) {
     click(p.x, p.y);
     return;
