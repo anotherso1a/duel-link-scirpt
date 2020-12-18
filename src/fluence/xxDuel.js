@@ -6,7 +6,8 @@ import {
   isPrepare,
   // checkEnd,
   resetPosition,
-  clearEffect
+  clearEffect,
+  checkEnd
 } from "../common/utils";
 
 /**
@@ -70,18 +71,20 @@ export function attack(){
   var attackFlag = false;
   while (i--) {
     var x = list[i];
-    var stayTime = 0; // 计数器
     sleep(300);
     resetPosition();
     sleep(1000);
     swipe(x, startY, endX, endY, 200); // 攻击
     sleep(300);
     while (!canOperate()) {
-      stayTime++; // 计数器自增
       // 如果不能操作说明正在攻击
       attackFlag = true;
       // 如果是最后一击，那这个按钮也出不来了，在此判断一下
-      if (stayTime >= 3) break;
+      var p = checkEnd();
+      if (p) {
+        click(p.x, p.y);
+        return;
+      }
       // 也有可能是有魔法或陷阱卡可以发动
       while (checkExtra()) {
         sleep(1000); // 每1s检查一下是否有其他卡片效果发动
