@@ -29,6 +29,6 @@ fi
 
 export RELEASE="release"
 
-npm version $type -m '[release] '$type': @%s'
+npm version $type
 
 git push origin --tag
