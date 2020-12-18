@@ -18,9 +18,9 @@ fi
 
 isPre=$(echo $type | grep "${PRE}")
 
-if [ -z "$isPre" ] && [ $BRANCH != "master" ]; then
+if [ -z "$isPre" ] && [ $BRANCH != "main" ]; then
   echo ""
-  echo "❗️只能在master分支进行npm的发布，请将分支合并至master后进行发布！"
+  echo "❗️只能在main分支进行release，请将分支合并至main后进行release ！"
   echo ""
   echo "🤚或使用 npm run release <premajor | preminor | prepatch | prerelease> 发布beta版本"
   echo ""
