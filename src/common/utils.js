@@ -72,6 +72,30 @@ export function isInact(capture){
   return p;
 }
 
+/**
+ * 页面上是否有自动决斗的按钮
+ */
+export function isAutoduel(capture){
+  var autoduel = getImage("./images/autoduel.png");
+  var p = FindImage(capture || captureScreen(), autoduel, {
+    threshold: 0.8
+  });
+
+  return p;
+}
+/**
+ * 是否正在自动决斗，有限级最高，有的话除了clearEffect之外不做任何操作
+ */
+export function isInAutoduel(capture){
+  var inauto = getImage("./images/inauto.png");
+  var p = FindImage(capture || captureScreen(), inauto, {
+    region: [0, 0, 720, 200],
+    threshold: 0.8
+  });
+
+  return p;
+}
+
 /** 页面上是否有按钮需要点击，需要优化，目前编辑卡片也会被点击 */
 export function needClick(capture){
   var needclick = getImage("./images/needclick.png");

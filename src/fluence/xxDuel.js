@@ -7,7 +7,8 @@ import {
   // checkEnd,
   resetPosition,
   clearEffect,
-  checkEnd
+  checkEnd,
+  isInAutoduel
 } from "../common/utils";
 
 /**
@@ -126,6 +127,7 @@ export function actDuel(){
     sleep(1000); // 有则持续跟进
   } // 通常额外事件检查，避免阻塞
   var capture = captureScreen(); // 取截图
+  if (isInAutoduel(capture)) return; // 如果自动决斗，不管
   if (isAttack(capture)) { // 若符合判断则调用并中断，不符合条件则继续判断下一个流程
     // 战斗阶段
     attack();
