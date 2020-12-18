@@ -1,2 +1,13 @@
 # duel-link-scirpt
-auto confluence by autojs
+
+## install
+
+```sh
+yarn install
+```
+
+## build
+
+```sh
+yarn build
+```
