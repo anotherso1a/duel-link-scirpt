@@ -2,7 +2,7 @@ import {
   canOperate,
   checkExtra,
   isAttack,
-  nextSetp,
+  nextStep,
   isPrepare,
   // checkEnd,
   // resetPosition,
@@ -157,11 +157,11 @@ export function xxDuel(){
   if (isAttack(capture)) { // 若符合判断则调用并中断，不符合条件则继续判断下一个流程
     // 战斗阶段
     attack();
-    return nextSetp();
+    return nextStep();
   }
   if (isPrepare(capture)) { // 准备阶段
     use();
-    return nextSetp();
+    return nextStep();
   }
 }
 
@@ -172,21 +172,21 @@ export function xxDuel(){
 export function actDuel(){
   while (checkExtra()) {
     sleep(1000); // 有则持续跟进
-    if (isInDuel()) break; // 发现有时候会在外层界面卡在这个循环里面，这里判断一下，不在决斗中的话就退出循环
+    if (!isInDuel()) return; // 发现有时候会在外层界面卡在这个循环里面，这里判断一下，不在决斗中的话就退出循环
   } // 通常额外事件检查，避免阻塞
   var capture = captureScreen(); // 取截图
   if (isInAutoduel(capture)) return; // 如果自动决斗，不管
   if (isAttack(capture)) { // 若符合判断则调用并中断，不符合条件则继续判断下一个流程
     // 战斗阶段
     // 判断黄金宫，有的话直接结束
-    if (hasGold()) return nextSetp();
+    if (hasGold()) return nextStep();
     attack();
-    return nextSetp();
+    return nextStep();
   }
   if (isPrepare(capture)) { // 准备阶段
     useCover(); // 盖卡的主动发动
     use(true);
     extraOpt();
-    return nextSetp();
+    return nextStep();
   }
 }

@@ -246,7 +246,7 @@ export function canOperate(capture){
 }
 
 /** 跳转到下一阶段，应在canOperate识别到之后才能调用 */
-export function nextSetp(){
+export function nextStep(){
   click(661, 815);
   sleep(500);
   click(661, 815);
