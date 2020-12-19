@@ -30,6 +30,7 @@ export function MatchTemplate(image, tpl, options){
   }
   var res = images.matchTemplate(image, tpl, options);
   res.matches.forEach(p => {
+    p = p.point;
     p.x = p.x / (RATIO * RATIO);
     p.y = p.y / (RATIO * RATIO);
   });
