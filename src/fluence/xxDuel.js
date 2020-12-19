@@ -26,6 +26,7 @@ export function useCover(){
     sleep(300);
     click(360, 939); // 使用效果
     sleep(300); // checkExtra的时间能抵消这个延时，先放在这，兼容下通常怪兽脚本
+    clearEffect();
     var used = canOperate();
     if (!used) { // 按钮消失说明使用成功
       // 走分支路线，判断是否需要装备，升级等
@@ -115,8 +116,8 @@ export function attack(){
   var startY = 725; // 后续可以考虑从checkAtack返回
   var endY = 485;
   var endX = 356;
-  var i = list.length;
-  while (i) {
+  var i = 0;
+  while (i < list.length) {
     var x = list[i];
     var attackFlag = false;
     swipe(x, startY, endX, endY, 200); // 攻击
@@ -137,7 +138,7 @@ export function attack(){
       sleep(1000); // 检查完后过1s再检查下能操作了不
     }
     if (!attackFlag) { // 考虑可以多次攻击的情况，只有操作攻击无效时，才判定无法攻击
-      i--;
+      i++;
     }
   }
   // 是否攻击过
