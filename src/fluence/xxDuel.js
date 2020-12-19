@@ -170,9 +170,13 @@ export function xxDuel(){
  * 活动决斗，可以考虑通用化
  */
 export function actDuel(){
+  var tryTimes = 0;
   while (checkExtra()) {
+    tryTimes++;
     sleep(1000); // 有则持续跟进
-    if (!isInDuel()) return; // 发现有时候会在外层界面卡在这个循环里面，这里判断一下，不在决斗中的话就退出循环
+    if (tryTimes > 2) {
+      if (!isInDuel()) return; // 发现有时候会在外层界面卡在这个循环里面，这里判断一下，不在决斗中的话就退出循环
+    }
   } // 通常额外事件检查，避免阻塞
   var capture = captureScreen(); // 取截图
   if (isInAutoduel(capture)) return; // 如果自动决斗，不管
