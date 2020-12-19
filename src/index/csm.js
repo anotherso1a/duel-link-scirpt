@@ -2,6 +2,6 @@
 import { csmFluence } from '../fluence';
 
 while (true) {
-  sleep(3000);
+  sleep(2500);
   csmFluence();
 }

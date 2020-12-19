@@ -2,6 +2,6 @@
 import { actFluence } from '../fluence';
 
 while (true) {
-  sleep(3000);
+  sleep(2500);
   actFluence();
 }

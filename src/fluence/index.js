@@ -14,6 +14,7 @@ export var xxFluence = () => {
   } else {
     xxOutCheck();
   }
+  sleep(500);
   clearEffect(); // 不应该开始的时候触发，应该结束的时候点
 };
 
@@ -23,6 +24,7 @@ export var csmFluence = () => {
   } else {
     csmOutCheck();
   }
+  sleep(500);
   clearEffect();
 };
 
@@ -32,5 +34,6 @@ export var actFluence = () => {
   } else {
     actOutCheck();
   }
+  sleep(500);
   clearEffect();
 };
