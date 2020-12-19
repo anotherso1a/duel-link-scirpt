@@ -1,6 +1,6 @@
 {
   "name": "duel-link-scirpt",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "auto conplete confluence",
   "main": "index.js",
   "scripts": {
