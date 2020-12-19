@@ -1,4 +1,4 @@
-import { FindImage, getImage } from "./actions";
+import { FindImage, getImage, MatchTemplate } from "./actions";
 
 /** 停止所有脚本进程 */
 export function stopAll(){
@@ -124,13 +124,14 @@ export function clearEffect(){
 
 /**
  * 分支路线
+ * 是否发动效果的处理，各种分支选择的处理都放到这里，但是检查多了之后会导致效率变低
  */
 export function checkExtra(capture){
   capture = capture || captureScreen();
   // 页面是否有确认按钮，优先判断，有就点
   var confirm = getImage("./images/confirm.png");
   var p = FindImage(capture, confirm, {
-    region: [0, 516, 720, 300],
+    region: [0, 516, 720, 300], 
     threshold: 0.8
   });
 
@@ -158,10 +159,21 @@ export function checkExtra(capture){
     threshold: 0.8
   });
 
-  if (p) {
+  if (p) { // 后续考虑兼容牌组顺序情况，暂时先不管，这个方法耗费时间有点多了
     click(135, 874);
     sleep(500);
     click(375, 1082);
+    sleep(500);
+    click(375, 1236); // 有骰子或者属性选择的情况，点一下更下面的按钮
+    return p;
+  }
+  var hasback = getImage("./images/hasback.png"); // 返回按钮，对方让你查看卡组时会有这种情况
+  p = FindImage(capture, hasback, {
+    region: [0, 1183, 100, 100],
+    threshold: 0.8
+  });
+  if (p) {
+    click(p.x, p.y);
     return p;
   }
   p = needClick(capture);
@@ -169,6 +181,57 @@ export function checkExtra(capture){
     click(p.x, p.y);
   }
   return p; // 如果都没有触发那就走别的流程
+}
+
+/**
+ * 判断我方怪兽卡片的位置
+ */
+export function checkAttack(capture){
+  var atk = getImage("./images/atk.png");
+  var atk_g = getImage("./images/atk_g.png");
+  var res = MatchTemplate(capture || captureScreen(), atk, {
+    region: [156, 600, 400, 200],
+    max: 3,
+    threshold: 0.8
+  });
+  var res_g = MatchTemplate(capture || captureScreen(), atk_g, {
+    region: [156, 600, 400, 200],
+    max: 3,
+    threshold: 0.8
+  });
+  for (var i = 0;i < res_g.length;i++) {
+    res[res.length + i] = res_g[i];
+  }
+  var width = atk.getWidth();
+  for (var j = 0;j < res.length;j++) {
+    res[j] = res[j].point.x + width; // 只保留格式化后的x位置
+  }
+
+  return res;
+}
+/**
+ * 对面是否有黄金宫
+ */
+export function hasGold(capture){
+  var gold = getImage("./images/gold.png");
+  var p = FindImage(capture || captureScreen(), gold, {
+    region: [560, 400, 130, 140],
+    threshold: 0.8
+  });
+
+  return p;
+}
+/**
+ * 额外卡组是否可用
+ */
+export function canUseExtra(capture){
+  var extra_card = getImage("./images/extra_card.png");
+  var p = FindImage(capture || captureScreen(), extra_card, {
+    region: [0, 806, 130, 130],
+    threshold: 0.8
+  });
+
+  return p;
 }
 
 /** 是否有跳转至下一个阶段的按钮 */

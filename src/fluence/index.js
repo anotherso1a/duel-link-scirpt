@@ -9,28 +9,28 @@ import {
 
 
 export var xxFluence = () => {
-  clearEffect();
   if (isInDuel()) {
-    xxDuel();
+    actDuel();
   } else {
     xxOutCheck();
   }
+  clearEffect(); // 不应该开始的时候触发，应该结束的时候点
 };
 
 export var csmFluence = () => {
-  clearEffect();
   if (isInDuel()) {
-    xxDuel();
+    actDuel();
   } else {
     csmOutCheck();
   }
+  clearEffect();
 };
 
 export var actFluence = () => {
-  clearEffect();
   if (isInDuel()) {
     actDuel();
   } else {
     actOutCheck();
   }
+  clearEffect();
 };

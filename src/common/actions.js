@@ -9,8 +9,10 @@ import { CACHED_IMG, RATIO } from "./pre";
 // }
 
 export function FindImage(image, tpl, options){
-  if (options.region) {
-    options.region = options.region.map(e => e * RATIO);
+  if (options.region && options.region.length) {
+    for (var i = 0;i < options.region.length;i++) {
+      options.region[i] = options.region[i] * RATIO;
+    }
   }
   var p = findImage(image, tpl, options);
   if (p) {
@@ -18,6 +20,20 @@ export function FindImage(image, tpl, options){
     p.y = p.y / (RATIO * RATIO);
   }
   return p;
+}
+
+export function MatchTemplate(image, tpl, options){
+  if (options.region && options.region.length) {
+    for (var i = 0;i < options.region.length;i++) {
+      options.region[i] = options.region[i] * RATIO;
+    }
+  }
+  var res = images.matchTemplate(image, tpl, options);
+  res.matches.forEach(p => {
+    p.x = p.x / (RATIO * RATIO);
+    p.y = p.y / (RATIO * RATIO);
+  });
+  return res.matches;
 }
 
 export function getImage(path){

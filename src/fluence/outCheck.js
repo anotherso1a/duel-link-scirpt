@@ -89,3 +89,25 @@ export function actOutCheck(){
     return;
   }
 }
+
+
+/**
+ * 刷路人外部检查
+ */
+export function passengerOutCheck(){
+  var capture = captureScreen();
+  var p = isIndex(capture);
+  if (p) {
+    // todo 检查路人，点击路人
+    // click(360, 360);
+    return p;
+  }
+
+  // 判断自动决斗按钮，点击，并return
+
+  p = needClick(capture); // 默认循环，自动点击按钮
+  if (p) {
+    click(p.x, p.y);
+    return;
+  }
+}
