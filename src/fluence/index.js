@@ -3,8 +3,8 @@ import {
 } from "../common/utils";
 import { actOutCheck, csmOutCheck, xxOutCheck } from "./outCheck";
 import {
-  actDuel,
-  xxDuel
+  actDuel
+  // xxDuel
 } from "./xxDuel";
 
 

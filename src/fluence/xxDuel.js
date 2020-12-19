@@ -11,7 +11,8 @@ import {
   isInAutoduel,
   checkAttack,
   hasGold,
-  canUseExtra
+  canUseExtra,
+  isInDuel
 } from "../common/utils";
 
 /**
@@ -171,6 +172,7 @@ export function xxDuel(){
 export function actDuel(){
   while (checkExtra()) {
     sleep(1000); // 有则持续跟进
+    if (isInDuel()) break; // 发现有时候会在外层界面卡在这个循环里面，这里判断一下，不在决斗中的话就退出循环
   } // 通常额外事件检查，避免阻塞
   var capture = captureScreen(); // 取截图
   if (isInAutoduel(capture)) return; // 如果自动决斗，不管
