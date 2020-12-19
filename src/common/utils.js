@@ -169,7 +169,7 @@ export function checkExtra(capture){
   }
   var hasback = getImage("./images/hasback.png"); // 返回按钮，对方让你查看卡组时会有这种情况
   p = FindImage(capture, hasback, {
-    region: [0, 1183, 100, 100],
+    region: [0, 1180, 100, 100],
     threshold: 0.8
   });
   if (p) {
