@@ -8,6 +8,7 @@
     "lint": "eslint --ext .js src/",
     "preinstall": "node ./scripts/checkYarn.js",
     "prepublishOnly": "bash ./scripts/release-check.sh",
+    "test": "yarn lint --fix && yarn build && zip -r dist/dist dist",
     "release": "bash ./scripts/release.sh"
   },
   "repository": {

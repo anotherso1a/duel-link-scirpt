@@ -96,6 +96,33 @@ export function isInAutoduel(capture){
   return p;
 }
 
+/**
+ * 是否触发了效果
+ */
+export function isEffect(capture){
+  var isEf = getImage("./images/useEffect.png");
+  var p = FindImage(capture || captureScreen(), isEf, {
+    region: [273, 1059, 177, 55],
+    threshold: 0.8
+  });
+
+  return p;
+}
+
+/**
+ * 在选择条件下是否有确认按钮
+ * 应该是包含了骰子选择按钮
+ */
+export function isChooseClick(capture){
+  var isCl = getImage("./images/c_confirm.png");
+  var p = FindImage(capture || captureScreen(), isCl, {
+    region: [273, 1059, 177, 220],
+    threshold: 0.8
+  });
+
+  return p;
+}
+
 /** 页面上是否有按钮需要点击，需要优化，目前编辑卡片也会被点击 */
 export function needClick(capture){
   var needclick = getImage("./images/needclick.png");
@@ -121,6 +148,76 @@ export function clearEffect(){
 
 // 决斗中相关
 
+/**
+ * 处理卡片选择
+ */
+export function processChoose(capture){
+  capture = capture || captureScreen();
+  var list = [135, 590, 390]; // 左 右 中的顺序进行点击，因为有时候中间那个会自动选中，避免死循环
+  // 是否需要选择，当左下角出现特殊按钮时，有就选择第一个
+  var choose = getImage("./images/choose.png");
+  var p = FindImage(capture, choose, {
+    region: [575, 1135],
+    threshold: 0.8
+  });
+  if (p) {
+    // 最优先检查召唤情况
+    // 选择攻击或守备表示形式
+    var extra = getImage("./images/extra.png");
+    p = FindImage(capture, extra, {
+      region: [0, 730, 720, 170],
+      threshold: 0.8
+    });
+
+    if (p) {
+      click(200, 600);
+      sleep(500);
+      click(p.x, p.y);
+      return true;
+    }
+    // 其次检查效果发动
+    p = isEffect(capture);
+    if (p) {
+      click(135, 980);
+      sleep(500);
+      click(375, 1082);
+      return true;
+    }
+    // 再次检查底部是否有确认按钮,有的话可能是选择手牌，或者是放牌顺序，或者是选择多个融合素材
+    // 包含属性选择，硬币正反面选择等
+    p = isChooseClick(capture);
+    if (p) {
+      var i = 0;
+      while (p && i < list.length) {
+        click(list[i], 980);
+        sleep(500);
+        click(p.x, p.y); // 选卡确认
+        i++;
+        sleep(400);
+        p = isChooseClick(); // 判断还有确认不，如果有，那说明还要选择其他牌
+      }
+      return true;
+    }
+    // 最后检查返回按钮
+    var hasback = getImage("./images/hasback.png"); // 返回按钮，对方让你查看卡组时会有这种情况
+    p = FindImage(capture, hasback, {
+      region: [0, 1180, 100, 80],
+      threshold: 0.8
+    });
+    if (p) {
+      // 新增反击之门的召唤情况，没有按钮，但是需要点击后召唤，在此阻塞一下
+      click(135, 980); // 点击怪兽
+      sleep(500);
+      click(360, 1082); // 点击召唤
+      sleep(500);
+      click(p.x, p.y); // 点击返回，当然如果召唤了这个返回就消失了
+      return true;
+    }
+    // 其他未考虑的情况,让其他流程去处理
+    return false;
+  }
+}
+
 
 /**
  * 分支路线
@@ -128,6 +225,7 @@ export function clearEffect(){
  */
 export function checkExtra(capture){
   capture = capture || captureScreen();
+  if (!isInDuel(capture)) return false; // 如果不在决斗中直接return
   // 页面是否有确认按钮，优先判断，有就点
   var confirm = getImage("./images/confirm.png");
   var p = FindImage(capture, confirm, {
@@ -139,48 +237,17 @@ export function checkExtra(capture){
     click(p.x, p.y);
     return p;
   }
-  // 选择攻击或守备表示形式
-  var extra = getImage("./images/extra.png");
-  p = FindImage(capture, extra, {
-    region: [0, 730, 720, 170],
-    threshold: 0.8
-  });
 
-  if (p) {
-    click(200, 600);
-    sleep(500);
-    click(p.x, p.y);
-    return p;
-  }
-  // 是否需要选择，当左下角出现特殊按钮时，有就选择第一个
-  var choose = getImage("./images/choose.png");
-  p = FindImage(capture, choose, {
-    region: [575, 1135],
-    threshold: 0.8
-  });
+  // 是否需要选择，当左下角出现特殊按钮时，集中处理各种情况
+  p = processChoose(capture);
+  if (p) return p; // 如果处理过则直接中断
 
-  if (p) { // 后续考虑兼容牌组顺序情况，暂时先不管，这个方法耗费时间有点多了
-    click(135, 874);
-    sleep(500);
-    click(375, 1082);
-    sleep(500);
-    click(375, 1236); // 有骰子或者属性选择的情况，点一下更下面的按钮
-    return p;
-  }
-  var hasback = getImage("./images/hasback.png"); // 返回按钮，对方让你查看卡组时会有这种情况
-  p = FindImage(capture, hasback, {
-    region: [0, 1180, 100, 80],
-    threshold: 0.8
-  });
-  if (p) {
-    click(p.x, p.y);
-    return p;
-  }
   p = needClick(capture);
   if (p) {
     click(p.x, p.y);
+    return p;
   }
-  return p; // 如果都没有触发那就走别的流程
+  return false; // 如果都没有触发那就走别的流程
 }
 
 /**
@@ -188,23 +255,24 @@ export function checkExtra(capture){
  */
 export function checkAttack(capture){
   var atk = getImage("./images/atk.png");
-  var atk_g = getImage("./images/atk_g.png");
+  // var atk_g = getImage("./images/atk_g.png");
   var res = MatchTemplate(capture || captureScreen(), atk, {
-    region: [156, 600, 400, 200],
+    region: [120, 600, 400, 200],
     max: 3,
     threshold: 0.8
   });
-  var res_g = MatchTemplate(capture || captureScreen(), atk_g, {
-    region: [156, 600, 400, 200],
-    max: 3,
-    threshold: 0.8
-  });
-  for (var i = 0;i < res_g.length;i++) {
-    res[res.length + i] = res_g[i];
-  }
+  // var res_g = MatchTemplate(capture || captureScreen(), atk_g, {
+  //   region: [156, 600, 400, 200],
+  //   max: 3,
+  //   threshold: 0.8
+  // });
+  // for (var i = 0;i < res_g.length;i++) {
+  //   res[res.length + i] = res_g[i];
+  // }
   var width = atk.getWidth();
   for (var j = 0;j < res.length;j++) {
     res[j] = res[j].point.x + width; // 只保留格式化后的x位置
+    // toastLog(res[j]);
   }
 
   return res;
@@ -222,12 +290,12 @@ export function hasGold(capture){
   return p;
 }
 /**
- * 额外卡组是否可用
+ * 额外卡组是否可用,盖卡是否可用
  */
 export function canUseExtra(capture){
   var extra_card = getImage("./images/extra_card.png");
   var p = FindImage(capture || captureScreen(), extra_card, {
-    region: [0, 806, 130, 130],
+    region: [0, 806],
     threshold: 0.8
   });
 
