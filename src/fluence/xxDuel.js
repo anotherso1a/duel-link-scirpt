@@ -49,10 +49,10 @@ export function extraOpt(){
     click(p.x, p.y);
     sleep(300);
     click(396, 977);
-    sleep(300);
+    sleep(1000);
     // 走分支路线，判断是否需要装备，升级等
     while (checkExtra()) { // 持续跟进
-      sleep(1000);
+      sleep(800);
     }
     return true;
   }
