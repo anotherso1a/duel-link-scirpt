@@ -28,6 +28,18 @@ export var csmFluence = () => {
   clearEffect();
 };
 
+// 龙亚活动脚本
+// export var actFluence = () => {
+//   if (isInDuel()) {
+//     actDuel();
+//   } else {
+//     actOutCheck();
+//   }
+//   sleep(500);
+//   clearEffect();
+// };
+
+// 活动脚本
 export var actFluence = () => {
   if (isInDuel()) {
     actDuel();

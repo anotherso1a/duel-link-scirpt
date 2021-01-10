@@ -119,7 +119,8 @@ function doAtk(list){
       checkExtra(); // 判断分支
       sleep(500);
     }
-    swipe(list[i], 725, 356, 485, 200); // 攻击
+    // 这里少滑一点，刚刚能触发攻击就好，不要拖动画面位置
+    swipe(list[i], 725, list[i], 645, 200); // 攻击
     sleep(500);
     if (!canOperate()) {
       tryTimes++;
