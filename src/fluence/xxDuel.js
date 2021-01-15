@@ -120,8 +120,8 @@ function doAtk(list){
       sleep(500);
     }
     // 这里少滑一点，刚刚能触发攻击就好，不要拖动画面位置
-    swipe(list[i], 725, list[i], 635, 200); // 攻击
-    sleep(500);
+    swipe(list[i], 725, list[i], 615, 300); // 攻击
+    sleep(700);
     if (!canOperate()) {
       tryTimes++;
       if (tryTimes > 2) {
