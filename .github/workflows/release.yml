@@ -22,15 +22,11 @@ jobs:
           node-version: '12'
 
       - name: install dependencies
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install
+        run: yarn install
 
       - name: build project
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build # will run `yarn build` command
-        
+        run: yarn build
+
       - name: zip files
         run: zip -r dist dist
 
