@@ -41,5 +41,6 @@ module.exports = {
     'key-spacing': 'error',
     'keyword-spacing': 'error',
     'no-multi-spaces': 'error',
+    'no-unused-vars': 'off'
   }
 }

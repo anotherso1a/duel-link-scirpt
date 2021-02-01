@@ -296,7 +296,7 @@ export function canUseExtra(capture){
   var extra_card = getImage("./images/extra_card.png");
   var p = FindImage(capture || captureScreen(), extra_card, {
     region: [0, 806],
-    threshold: 0.8
+    threshold: 0.9
   });
 
   return p;
