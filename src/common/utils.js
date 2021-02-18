@@ -29,7 +29,7 @@ export function isIndex(capture){
 export function isxx(capture){
   var xx = getImage("./images/xx.png");
   var p = FindImage(capture || captureScreen(), xx, {
-    region: [0, 518, 720, 140],
+    region: [0, 518], // 不限定范围来提升性能是因为KC杯会占用位置
     threshold: 0.8
   });
 

@@ -193,10 +193,10 @@ export function actDuel(){
     return nextStep();
   }
   if (isPrepare(capture)) { // 准备阶段
-    use(true);
     while (extraOpt()) {
       sleep(1000);
-    }
+    } // 先用盖卡
+    use(true);
     return nextStep();
   }
 }
