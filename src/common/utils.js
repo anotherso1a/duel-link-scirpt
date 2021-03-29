@@ -306,7 +306,7 @@ export function canUseExtra(capture){
 export function canOperate(capture){
   var indl = getImage("./images/indl.png");
   var p = FindImage(capture || captureScreen(), indl, {
-    region: [525, 708, 195, 300],
+    region: [594, 773, 120, 80],
     threshold: 0.8
   });
 
@@ -353,6 +353,7 @@ export function checkEnd(capture){
 export function isPrepare(capture){
   var prepare = getImage("./images/prepare.png");
   var p = FindImage(capture || captureScreen(), prepare, {
+    // region: [370, 50],
     region: [370, 50, 300, 100],
     threshold: 0.8
   });
@@ -366,6 +367,7 @@ export function isPrepare(capture){
 export function isAttack(capture){
   var atk = getImage("./images/attack.png");
   var p = FindImage(capture || captureScreen(), atk, {
+    // region: [370, 50],
     region: [370, 50, 300, 100],
     threshold: 0.8
   });
@@ -378,7 +380,7 @@ export function isAttack(capture){
 export function isInDuel(capture){
   var induel = getImage("./images/induel.png");
   var p = FindImage(capture || captureScreen(), induel, {
-    region: [445, 19, 100, 40],
+    region: [636, 28, 80, 80],
     threshold: 0.8
   });
 
