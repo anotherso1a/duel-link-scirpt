@@ -353,7 +353,7 @@ export function checkEnd(capture){
 export function isPrepare(capture){
   var prepare = getImage("./images/prepare.png");
   var p = FindImage(capture || captureScreen(), prepare, {
-    region: [400, 60, 200, 40],
+    region: [370, 50, 300, 100],
     threshold: 0.8
   });
 
@@ -366,7 +366,7 @@ export function isPrepare(capture){
 export function isAttack(capture){
   var atk = getImage("./images/attack.png");
   var p = FindImage(capture || captureScreen(), atk, {
-    region: [400, 60, 200, 40],
+    region: [370, 50, 300, 100],
     threshold: 0.8
   });
 
